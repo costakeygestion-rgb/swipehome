@@ -11,6 +11,8 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
+import { MortgageCalculator } from '../../components/MortgageCalculator';
+import { VacationPriceBreakdown } from '../../components/VacationPriceBreakdown';
 import {
   Colors,
   PropertyTypeColors,
@@ -217,6 +219,20 @@ export default function PropertyDetailScreen() {
                   </View>
                 )}
               </View>
+            </View>
+          )}
+
+          {/* Vacation Price Breakdown */}
+          {property.type === 'vacation' && (
+            <View style={styles.section}>
+              <VacationPriceBreakdown pricePerNight={property.price} />
+            </View>
+          )}
+
+          {/* Mortgage Calculator */}
+          {property.type === 'buy' && (
+            <View style={styles.section}>
+              <MortgageCalculator propertyPrice={property.price} />
             </View>
           )}
 

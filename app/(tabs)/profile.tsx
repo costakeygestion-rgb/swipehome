@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../../lib/constants';
 
@@ -30,6 +31,7 @@ function SettingsRow({ icon, label, onPress, badge }: SettingsRowProps) {
 
 export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
 
   return (
     <ScrollView
@@ -60,10 +62,26 @@ export default function ProfileScreen() {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>PROPIETARIOS</Text>
         <View style={styles.sectionContent}>
-          <SettingsRow icon="add-circle-outline" label="Publicar inmueble" />
-          <SettingsRow icon="home-outline" label="Mis anuncios" />
-          <SettingsRow icon="bar-chart-outline" label="Estadísticas" />
-          <SettingsRow icon="diamond-outline" label="Plan Premium" />
+          <SettingsRow
+            icon="add-circle-outline"
+            label="Publicar inmueble"
+            onPress={() => router.push('/owner/publish')}
+          />
+          <SettingsRow
+            icon="home-outline"
+            label="Mis anuncios"
+            onPress={() => router.push('/owner/dashboard')}
+          />
+          <SettingsRow
+            icon="bar-chart-outline"
+            label="Estadísticas"
+            onPress={() => router.push('/owner/dashboard')}
+          />
+          <SettingsRow
+            icon="diamond-outline"
+            label="Plan Premium"
+            onPress={() => router.push('/owner/billing')}
+          />
         </View>
       </View>
 
@@ -71,10 +89,31 @@ export default function ProfileScreen() {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>SERVICIOS COSTA KEY</Text>
         <View style={styles.sectionContent}>
-          <SettingsRow icon="key-outline" label="Gestión de alquiler" />
-          <SettingsRow icon="document-text-outline" label="Trámites de compraventa" />
-          <SettingsRow icon="calculator-outline" label="Asesoría fiscal" />
-          <SettingsRow icon="camera-outline" label="Fotografía profesional" />
+          <SettingsRow
+            icon="briefcase-outline"
+            label="Ver todos los servicios"
+            onPress={() => router.push('/services')}
+          />
+          <SettingsRow
+            icon="key-outline"
+            label="Gestión de alquiler"
+            onPress={() => router.push('/services/request?serviceId=full_management&title=Gesti%C3%B3n%20integral%20de%20alquiler%20vacacional')}
+          />
+          <SettingsRow
+            icon="document-text-outline"
+            label="Trámites de compraventa"
+            onPress={() => router.push('/services/request?serviceId=buy_sell_process&title=Tramitaci%C3%B3n%20de%20compraventa')}
+          />
+          <SettingsRow
+            icon="calculator-outline"
+            label="Asesoría fiscal"
+            onPress={() => router.push('/services/request?serviceId=fiscal_advisory&title=Asesor%C3%ADa%20fiscal')}
+          />
+          <SettingsRow
+            icon="camera-outline"
+            label="Fotografía profesional"
+            onPress={() => router.push('/services/request?serviceId=photography&title=Fotograf%C3%ADa%20profesional')}
+          />
         </View>
       </View>
 
